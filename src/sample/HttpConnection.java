@@ -24,16 +24,14 @@ public class HttpConnection {
     //TODO: メソッドはenumで
     /**
      * Requestを送る
-     * @return ResponseのHeader
-     * @throws IOException
+     * @return Responseオブジェクト
+     * @throws IOException URLが不正だった場合スローされる
      */
-    public String sendRequest() throws IOException {
+    public Response sendRequest() throws IOException {
         Request req = new Request.Builder().url(url).build();
 
         Response res = client.newCall(req).execute();
-        String resHeader = res.headers().toString();
-        res.close();
-        return resHeader;
+        return res;
     }
 
 }

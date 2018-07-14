@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,15 +9,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import okhttp3.Headers;
+import okhttp3.Response;
 
+import javax.net.ssl.SSLHandshakeException;
 import java.io.IOException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -26,6 +29,10 @@ public class Controller implements Initializable {
     private TextField urlField;
     @FXML
     private TextArea headerArea;
+    @FXML
+    private ListView<String> HeaderDetailListView;
+
+    private ObservableList<String> items = FXCollections.observableArrayList();
 
 
     // submit
@@ -33,16 +40,19 @@ public class Controller implements Initializable {
     public void onSubmitClick(ActionEvent evt) {
         try {
             HttpConnection httpConnection = new HttpConnection(urlField.getText());
-            headerArea.setText(httpConnection.sendRequest());
+            Response res = httpConnection.sendRequest();
+            headerArea.setText(res.headers().toString());
+            for(int i = 0; i < res.headers().size(); i++){
+                items.add(res.headers().name(i) + ": " + res.headers().value(i));
+            }
 
             urlField.setStyle("");
 
             System.out.println("submit");
-        }catch (IOException e){
-            // TODO: GUIにエラーを表示させる
-
+        }catch(SSLHandshakeException e){
             System.out.println(e);
-        }catch(IllegalArgumentException e){  // urlが不正
+        }catch(IllegalArgumentException | IOException e){  // urlが不正
+            System.out.println(e);
             urlField.setStyle("-fx-base: #FF0000");
         }
     }
@@ -62,6 +72,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        // ListViewにObservableなリストを設定する。
+        HeaderDetailListView.setItems(items);
     }
 }
