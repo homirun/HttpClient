@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.OptionController">
    <children>
-      <AnchorPane layoutX="-3.0" layoutY="-2.0" prefHeight="400.0" prefWidth="600.0" />
+      <AnchorPane layoutX="-3.0" layoutY="-2.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <TextField layoutX="153.0" layoutY="30.0" prefHeight="26.0" prefWidth="398.0" />
+            <ChoiceBox fx:id="methodBox" layoutX="27.0" layoutY="30.0" prefHeight="27.0" prefWidth="116.0" />
+         </children></AnchorPane>
    </children>
 </AnchorPane>
