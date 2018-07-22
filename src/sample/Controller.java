@@ -44,13 +44,22 @@ public class Controller implements Initializable {
      */
     @FXML
     public void onSubmitClick(ActionEvent evt) {
+
+        if(items != null){
+            items.clear();
+        }
+
         try {
             HttpConnection httpConnection = new HttpConnection(urlField.getText());
             Response res;
             RequestBody reqBody;
-            if(method.equals("get")) {
+            method = methodBox.getValue();
+
+            if(method.equals("GET")) {
+                System.out.println("GET");
                 res = httpConnection.sendRequest(method);
             }else{
+                System.out.println(method);
                 //TODO: RequestBodyを変数に置き換える
                 reqBody= RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),"");
                 res = httpConnection.sendRequest(method, reqBody);

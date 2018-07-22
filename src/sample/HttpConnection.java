@@ -29,7 +29,8 @@ public class HttpConnection {
      * @throws IOException URLが不正だった場合スローされる
      */
     public Response sendRequest(String method) throws IOException {
-        // TODO: methodで判定
+
+        // GET
         Request req;
         req = new Request.Builder().url(url).get().build();
         Response res = client.newCall(req).execute();
@@ -37,9 +38,17 @@ public class HttpConnection {
     }
 
     public Response sendRequest(String method, RequestBody body) throws IOException{
-        //post put用
+
         Request req;
-        req = new Request.Builder().url(url).post(body).build();
+
+        //POST PUT
+        if(method.equals("POST")) {
+            req = new Request.Builder().url(url).post(body).build();
+        }
+        else{
+            req = new Request.Builder().url(url).put(body).build();
+        }
+
         Response res = client.newCall(req).execute();
         return res;
     }
