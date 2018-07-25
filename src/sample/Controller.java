@@ -50,7 +50,13 @@ public class Controller implements Initializable {
         }
 
         try {
-            HttpConnection httpConnection = new HttpConnection(urlField.getText());
+            String url = urlField.getText();
+            if(!url.contains("http://") && !url.contains("https://")){
+               url = "http://" + url;
+
+               System.out.println(url);
+            }
+            HttpConnection httpConnection = new HttpConnection(url);
             Response res;
             RequestBody reqBody;
             method = methodBox.getValue();
