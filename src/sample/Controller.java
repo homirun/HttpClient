@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.NestedParticle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +19,8 @@ import javax.net.ssl.SSLHandshakeException;
 import java.io.IOException;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -32,11 +35,23 @@ public class Controller implements Initializable {
     @FXML
     private ListView<String> HeaderDetailListView;
     @FXML
-    ChoiceBox<String> methodBox;
+    private ChoiceBox<String> methodBox;
+    @FXML
+    private ListView<OptionListModel> optionHeaderListView;
+    @FXML
+    private TextField requestHeaderField;
+    @FXML
+    private TextField requestHeaderValueField;
+    @FXML
+    private Button requestHeaderAdd;
+
+
 
     private ObservableList<String> items = FXCollections.observableArrayList();
 
     private String method = "GET";
+    private Map<String,String> reqHeaders = new LinkedHashMap<>();
+    private ObservableList<OptionListModel> requestHeaderModels = FXCollections.observableArrayList();
 
     /**
      * submitを押したときに発火するイベントハンドラ
@@ -53,8 +68,6 @@ public class Controller implements Initializable {
             String url = urlField.getText();
             if(!url.contains("http://") && !url.contains("https://")){
                url = "http://" + url;
-
-               System.out.println(url);
             }
             HttpConnection httpConnection = new HttpConnection(url);
             Response res;
@@ -63,12 +76,12 @@ public class Controller implements Initializable {
 
             if(method.equals("GET")) {
                 System.out.println("GET");
-                res = httpConnection.sendRequest(method);
+                res = httpConnection.sendRequest(method, reqHeaders);
             }else{
                 System.out.println(method);
                 //TODO: RequestBodyを変数に置き換える
                 reqBody= RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),"");
-                res = httpConnection.sendRequest(method, reqBody);
+                res = httpConnection.sendRequest(method, reqBody, reqHeaders);
             }
 
             responseArea.setText(res.body().string());
@@ -84,6 +97,12 @@ public class Controller implements Initializable {
             System.out.println(e);
             urlField.setStyle("-fx-base: #FF0000");
         }
+    }
+
+    @FXML
+    public void onRequestHeaderAddClick(){
+        reqHeaders.put(requestHeaderField.getText(), requestHeaderValueField.getText());
+        requestHeaderModels.add(new OptionListModel(requestHeaderField.getText(), requestHeaderValueField.getText()));
     }
 
     /**
@@ -112,6 +131,10 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // ListViewにObservableなリストを設定する。
         HeaderDetailListView.setItems(items);
+
+        //optionHeaderListViewへOptionCellの適用。
+        optionHeaderListView.setCellFactory(param -> new OptionCell());
+        optionHeaderListView.setItems(requestHeaderModels);
 
         // MethodListにObservableなリストを設定する。
         ObservableList<String> methodList = FXCollections.observableArrayList();

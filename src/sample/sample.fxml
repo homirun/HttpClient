@@ -2,12 +2,14 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
@@ -17,9 +19,8 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="urlField" layoutX="115.0" layoutY="19.0" prefHeight="27.0" prefWidth="284.0" AnchorPane.leftAnchor="115.0" />
-                        <Button fx:id="submit" layoutX="415.0" layoutY="19.0" mnemonicParsing="false" onAction="#onSubmitClick" prefHeight="27.0" prefWidth="74.0" text="submit" AnchorPane.leftAnchor="415.0" />
-                        <Button fx:id="responseOption" layoutX="501.0" layoutY="19.0" mnemonicParsing="false" onAction="#onOptionClick" prefHeight="27.0" prefWidth="74.0" text="option" />
+                        <TextField fx:id="urlField" layoutX="115.0" layoutY="19.0" prefHeight="27.0" prefWidth="368.0" AnchorPane.leftAnchor="115.0" />
+                        <Button fx:id="submit" layoutX="495.0" layoutY="19.0" mnemonicParsing="false" onAction="#onSubmitClick" prefHeight="27.0" prefWidth="77.0" text="Submit" AnchorPane.leftAnchor="495.0" />
                         <TabPane layoutX="5.0" layoutY="51.0" prefHeight="316.0" prefWidth="593.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0">
                           <tabs>
                             <Tab text="Response">
@@ -31,7 +32,7 @@
                                     </AnchorPane>
                               </content>
                             </Tab>
-                            <Tab text="Detail">
+                            <Tab text="Header">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
@@ -40,16 +41,28 @@
                                     </AnchorPane>
                               </content>
                             </Tab>
+                              <Tab text="Option">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField fx:id="requestHeaderField" layoutX="14.0" layoutY="25.0" prefHeight="27.0" prefWidth="150.0" text="Header" AnchorPane.leftAnchor="14.0" />
+                                          <Label layoutX="174.0" layoutY="27.0" text=":" AnchorPane.leftAnchor="174.0">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="requestHeaderValueField" layoutX="188.0" layoutY="25.0" prefHeight="27.0" prefWidth="294.0" text="Value" AnchorPane.leftAnchor="188.0" />
+                                          <Button fx:id="requestHeaderAdd" layoutX="492.0" layoutY="25.0" mnemonicParsing="false" onAction="#onRequestHeaderAddClick" prefHeight="27.0" prefWidth="79.0" text="Add" AnchorPane.leftAnchor="495.0" />
+                                          <ListView fx:id="optionHeaderListView" layoutX="14.0" layoutY="58.0" prefHeight="217.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="66.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
                           </tabs>
                         </TabPane>
                         <ChoiceBox fx:id="methodBox" layoutX="14.0" layoutY="19.0" prefHeight="27.0" prefWidth="86.0" />
                      </children>
                   </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Option">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </Tab>
         </tabs>
