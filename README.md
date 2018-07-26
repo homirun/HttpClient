@@ -13,6 +13,7 @@
 - <a href="https://github.com/square/okio">OKio 1.14.1</a>
 
 ## Usage 
-1. HTTPメソッドを選択する
-2. URLを入力する
-3. Submitする
+1. out/artifacts/HttpClient_jar/HttpClient.jarを実行
+2. HTTPメソッドを選択する
+3. URLを入力する
+4. Submitする
