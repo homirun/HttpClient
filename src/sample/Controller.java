@@ -70,6 +70,14 @@ public class Controller implements Initializable {
             Response res;
             RequestBody reqBody;
             method = methodBox.getValue();
+            
+            if(reqHeaders.size() != requestHeaderModels.size()){
+                reqHeaders.clear();
+                for(OptionListModel obj: requestHeaderModels){
+
+                    reqHeaders.put(obj.getHeader().toString(), obj.getHeaderValue().toString());
+                }
+            }
 
             if(method.equals("GET")) {
                 System.out.println("GET");
@@ -96,17 +104,14 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * RequestHeaderタブのAddボタンを押したときに発火するイベントハンドラ
+     */
     @FXML
     public void onRequestHeaderAddClick(){
         reqHeaders.put(requestHeaderField.getText(), requestHeaderValueField.getText());
         requestHeaderModels.add(new OptionListModel(requestHeaderField.getText(), requestHeaderValueField.getText()));
     }
-
-    /**
-     * optionを押したときに発火するイベントハンドラ
-     * @param evt ActionEvent Obj
-     * @throws IOException option.fxmlが見当たらないとき
-     */
 
     /**
      * init
