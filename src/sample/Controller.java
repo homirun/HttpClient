@@ -1,6 +1,5 @@
 package sample;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.NestedParticle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +17,6 @@ import okhttp3.*;
 import javax.net.ssl.SSLHandshakeException;
 import java.io.IOException;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -43,8 +41,7 @@ public class Controller implements Initializable {
     @FXML
     private TextField requestHeaderValueField;
     @FXML
-    private Button requestHeaderAdd;
-
+    private TextArea responseBodyArea;
 
 
     private ObservableList<String> items = FXCollections.observableArrayList();
@@ -80,7 +77,7 @@ public class Controller implements Initializable {
             }else{
                 System.out.println(method);
                 //TODO: RequestBodyを変数に置き換える
-                reqBody= RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),"");
+                reqBody= RequestBody.create(MediaType.parse("text/plain;charset=utf-8"), responseBodyArea.getText());
                 res = httpConnection.sendRequest(method, reqBody, reqHeaders);
             }
 
@@ -110,17 +107,6 @@ public class Controller implements Initializable {
      * @param evt ActionEvent Obj
      * @throws IOException option.fxmlが見当たらないとき
      */
-    @FXML
-    public void onOptionClick(ActionEvent evt) throws IOException{
-        // optionStageを宣言
-        Stage optionStage = new Stage();
-        // option.fxmlをロードしたWindowを作成
-        Parent root = FXMLLoader.load(getClass().getResource("option.fxml"));
-        optionStage.initModality(Modality.WINDOW_MODAL);
-        optionStage.initOwner(((Node)evt.getSource()).getScene().getWindow());
-        optionStage.setScene(new Scene(root));
-        optionStage.show();
-    }
 
     /**
      * init

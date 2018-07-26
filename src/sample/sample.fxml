@@ -41,19 +41,28 @@
                                     </AnchorPane>
                               </content>
                             </Tab>
-                              <Tab text="Option">
+                              <Tab text="ResponseHeader">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextField fx:id="requestHeaderField" layoutX="14.0" layoutY="25.0" prefHeight="27.0" prefWidth="150.0" text="Header" AnchorPane.leftAnchor="14.0" />
+                                          <TextField fx:id="requestHeaderField" layoutX="14.0" layoutY="25.0" prefHeight="27.0" prefWidth="150.0" promptText="Header" AnchorPane.leftAnchor="14.0" />
                                           <Label layoutX="174.0" layoutY="27.0" text=":" AnchorPane.leftAnchor="174.0">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="requestHeaderValueField" layoutX="188.0" layoutY="25.0" prefHeight="27.0" prefWidth="294.0" text="Value" AnchorPane.leftAnchor="188.0" />
+                                          <TextField fx:id="requestHeaderValueField" layoutX="188.0" layoutY="25.0" prefHeight="27.0" prefWidth="294.0" promptText="Value" AnchorPane.leftAnchor="188.0" />
                                           <Button fx:id="requestHeaderAdd" layoutX="492.0" layoutY="25.0" mnemonicParsing="false" onAction="#onRequestHeaderAddClick" prefHeight="27.0" prefWidth="79.0" text="Add" AnchorPane.leftAnchor="495.0" />
                                           <ListView fx:id="optionHeaderListView" layoutX="14.0" layoutY="58.0" prefHeight="217.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="66.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                              <Tab text="ResponseBody">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea fx:id="responseBodyArea" layoutX="14.0" layoutY="42.0" prefHeight="200.0" prefWidth="576.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                 </content>

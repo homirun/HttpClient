@@ -6,7 +6,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -42,7 +41,6 @@ public class HttpConnection {
                 builder.addHeader(key, reqHeaders.get(key));
             }
         }
-
         req = builder.url(url).get().build();
         Response res = client.newCall(req).execute();
         return res;
