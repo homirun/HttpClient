@@ -4,16 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import okhttp3.*;
-
 import javax.net.ssl.SSLHandshakeException;
 import java.io.IOException;
 import java.net.URL;
@@ -84,7 +77,6 @@ public class Controller implements Initializable {
                 res = httpConnection.sendRequest(method, reqHeaders);
             }else{
                 System.out.println(method);
-                //TODO: RequestBodyを変数に置き換える
                 reqBody= RequestBody.create(MediaType.parse("text/plain;charset=utf-8"), responseBodyArea.getText());
                 res = httpConnection.sendRequest(method, reqBody, reqHeaders);
             }

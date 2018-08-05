@@ -32,12 +32,10 @@ public class HttpConnection {
      * @throws IOException URLが不正だった場合スローされる
      */
     public Response sendRequest(String method, Map<String,String> reqHeaders) throws IOException {
-        // GET
         Request req;
         Request.Builder builder = new Request.Builder();
         if(reqHeaders.size() > 0) {
             for (String key : reqHeaders.keySet()) {
-                System.out.println(key);
                 builder.addHeader(key, reqHeaders.get(key));
             }
         }
@@ -56,10 +54,8 @@ public class HttpConnection {
      * @throws IOException URLが不正だった場合スローされる
      */
     public Response sendRequest(String method, RequestBody body, Map<String,String> reqHeaders) throws IOException{
-
         Request req;
         Request.Builder builder = new Request.Builder();
-        //POST PUT
         if(method.equals("POST")) {
             if(reqHeaders.size() > 0){
                 for (String key: reqHeaders.keySet()) {
